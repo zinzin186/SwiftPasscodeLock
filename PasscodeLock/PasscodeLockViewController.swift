@@ -24,7 +24,7 @@ public enum LockState {
 }
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     
-
+    
     private static var nibName: String { return "PasscodeLockView" }
 
     open class var nibBundle: Bundle {
@@ -35,7 +35,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var titleLabel: UILabel?
     @IBOutlet open weak var descriptionLabel: UILabel?
     @IBOutlet open weak var cancelButton: UIButton?
-    @IBOutlet open weak var deleteSignButton: UIButton?
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet weak var forgotCodeButton: UIButton!
     
@@ -87,7 +86,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open override func viewDidLoad() {
         super.viewDidLoad()
         updatePasscodeView()
-        deleteSignButton?.isEnabled = false
         setupEvents()
     }
 
@@ -140,11 +138,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
 
     @IBAction func cancelButtonTap(_ sender: UIButton) {
-        dismissPasscodeLock(passcodeLock)
-    }
-
-    @IBAction func deleteSignButtonTap(_ sender: UIButton) {
-        passcodeLock.removeSign()
+        if sender.isSelected{
+            dismissPasscodeLock(passcodeLock)
+        }else{
+            passcodeLock.removeSign()
+        }
     }
 
     @IBAction func getPassCode(_ sender: Any) {
@@ -173,7 +171,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     // MARK: - Animations
 
     internal func animateWrongPassword() {
-        deleteSignButton?.isEnabled = false
+        cancelButton?.isSelected = true
         isPlaceholdersAnimationCompleted = false
 
         animatePlaceholders(placeholders, toState: .error)
@@ -211,7 +209,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     // MARK: - PasscodeLockDelegate
 
     open func passcodeLockDidSucceed(_ lock: PasscodeLockType) {
-        deleteSignButton?.isEnabled = true
+        cancelButton?.isSelected = false
         animatePlaceholders(placeholders, toState: .inactive)
         if self.stage == LockState.enter{
             maxNumberEnterWrong = 5
@@ -281,19 +279,19 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open func passcodeLockDidChangeState(_ lock: PasscodeLockType) {
         updatePasscodeView()
         animatePlaceholders(placeholders, toState: .inactive)
-        deleteSignButton?.isEnabled = false
+        cancelButton?.isSelected = true
     }
 
     open func passcodeLock(_ lock: PasscodeLockType, addedSignAt index: Int) {
         animatePlacehodlerAtIndex(index, toState: .active)
-        deleteSignButton?.isEnabled = true
+        cancelButton?.isSelected = false
     }
 
     open func passcodeLock(_ lock: PasscodeLockType, removedSignAt index: Int) {
         animatePlacehodlerAtIndex(index, toState: .inactive)
 
         if index == 0 {
-            deleteSignButton?.isEnabled = false
+            cancelButton?.isSelected = true
         }
     }
 }
