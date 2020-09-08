@@ -7,23 +7,23 @@
 //
 
 import UIKit
+public enum LockState {
+    case enter
+    case set
+    case change
+    case remove
 
-open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
-    public enum LockState {
-        case enter
-        case set
-        case change
-        case remove
-
-        func getState() -> PasscodeLockStateType {
-            switch self {
-                case .enter: return EnterPasscodeState()
-                case .set: return SetPasscodeState()
-                case .change: return ChangePasscodeState()
-                case .remove: return RemovePasscodeState()
-            }
+    func getState() -> PasscodeLockStateType {
+        switch self {
+            case .enter: return EnterPasscodeState()
+            case .set: return SetPasscodeState()
+            case .change: return ChangePasscodeState()
+            case .remove: return RemovePasscodeState()
         }
     }
+}
+open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
+    
 
     private static var nibName: String { return "PasscodeLockView" }
 
