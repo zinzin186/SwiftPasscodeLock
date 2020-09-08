@@ -23,14 +23,13 @@ struct SetPasscodeState: PasscodeLockStateType {
     
     init() {
         
-        title = localizedStringFor("PasscodeLockSetTitle", comment: "Set passcode title")
-        description = localizedStringFor("PasscodeLockSetDescription", comment: "Set passcode description")
+        title = "Nhập mã PIN cho trò chuyện bí mật"
+        description = "Ghi nhớ mã PIN để xem lại trò chuyện. Trò chuyện sẽ mất nếu bạn quên mã PIN"
     }
     
-    func acceptPasscode(passcode: [String], fromLock lock: PasscodeLockType) {
+    func accept(passcode: String, from lock: PasscodeLockType) {
         
-        let nextState = ConfirmPasscodeState(passcode: passcode)
-        
-        lock.changeStateTo(nextState)
+        lock.changeState(ConfirmPasscodeState(passcode: passcode))
+
     }
 }

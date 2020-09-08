@@ -8,28 +8,23 @@
 
 import UIKit
 
-public class PasscodeLockPresenter {
+open class PasscodeLockPresenter {
     
     private var mainWindow: UIWindow?
     
     private lazy var passcodeLockWindow: UIWindow = {
-        
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
-        window.windowLevel = 0
-        window.makeKeyAndVisible()
-        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.accessibilityLabel = "PasscodeLock Window"
         return window
     }()
-    
+
     private let passcodeConfiguration: PasscodeLockConfigurationType
-    public var isPasscodePresented = false
+    open var isPasscodePresented = false
     public let passcodeLockVC: PasscodeLockViewController
     
     public init(mainWindow window: UIWindow?, configuration: PasscodeLockConfigurationType, viewController: PasscodeLockViewController) {
         
         mainWindow = window
-        mainWindow?.windowLevel = 1
         passcodeConfiguration = configuration
         
         passcodeLockVC = viewController
@@ -37,72 +32,69 @@ public class PasscodeLockPresenter {
 
     public convenience init(mainWindow window: UIWindow?, configuration: PasscodeLockConfigurationType) {
         
-        let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: configuration)
+        let passcodeLockVC = PasscodeLockViewController(state: .enter, configuration: configuration)
         
         self.init(mainWindow: window, configuration: configuration, viewController: passcodeLockVC)
     }
     
-    public func presentPasscodeLock() {
+    open func present() {
         
         guard passcodeConfiguration.repository.hasPasscode else { return }
         guard !isPasscodePresented else { return }
         
         isPasscodePresented = true
-        
-        passcodeLockWindow.windowLevel = 2
-        passcodeLockWindow.hidden = false
-        
-        mainWindow?.windowLevel = 1
+
         mainWindow?.endEditing(true)
-        
-        let passcodeLockVC = PasscodeLockViewController(state: .EnterPasscode, configuration: passcodeConfiguration)
+        moveWindowsToFront()
+        passcodeLockWindow.isHidden = false
+
         let userDismissCompletionCallback = passcodeLockVC.dismissCompletionCallback
         
         passcodeLockVC.dismissCompletionCallback = { [weak self] in
             
             userDismissCompletionCallback?()
             
-            self?.dismissPasscodeLock()
+            self?.dismiss()
         }
         
         passcodeLockWindow.rootViewController = passcodeLockVC
     }
-    
-    public func dismissPasscodeLock(animated animated: Bool = true) {
+
+    open func dismiss(animated: Bool = true) {
         
         isPasscodePresented = false
-        mainWindow?.windowLevel = 1
-        mainWindow?.makeKeyAndVisible()
-        
+
         if animated {
         
             animatePasscodeLockDismissal()
             
         } else {
-            
-            passcodeLockWindow.windowLevel = 0
+            passcodeLockWindow.isHidden = true
             passcodeLockWindow.rootViewController = nil
         }
     }
     
     internal func animatePasscodeLockDismissal() {
-        
-        UIView.animateWithDuration(
-            0.5,
+        UIView.animate(
+            withDuration: 0.5,
             delay: 0,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 0,
-            options: [.CurveEaseInOut],
+            options: [],
             animations: { [weak self] in
-                
                 self?.passcodeLockWindow.alpha = 0
             },
             completion: { [weak self] _ in
-                
-                self?.passcodeLockWindow.windowLevel = 0
+                self?.passcodeLockWindow.isHidden = true
                 self?.passcodeLockWindow.rootViewController = nil
                 self?.passcodeLockWindow.alpha = 1
             }
         )
+    }
+
+    private func moveWindowsToFront() {
+        let windowLevel = UIApplication.shared.windows.last?.windowLevel ?? UIWindow.Level.normal
+        let maxWinLevel = max(windowLevel, .normal)
+        passcodeLockWindow.windowLevel =  maxWinLevel + 1
     }
 }

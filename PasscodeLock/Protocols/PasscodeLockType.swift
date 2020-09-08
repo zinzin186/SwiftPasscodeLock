@@ -9,24 +9,22 @@
 import Foundation
 
 public protocol PasscodeLockType {
-    
-    weak var delegate: PasscodeLockTypeDelegate? {get set}
-    var configuration: PasscodeLockConfigurationType {get}
-    var repository: PasscodeRepositoryType {get}
-    var state: PasscodeLockStateType {get}
-    var isTouchIDAllowed: Bool {get}
-    
-    func addSign(sign: String)
+    var delegate: PasscodeLockTypeDelegate? { get set }
+    var configuration: PasscodeLockConfigurationType { get }
+    var repository: PasscodeRepositoryType { get }
+    var state: PasscodeLockStateType { get }
+    var isTouchIDAllowed: Bool { get }
+
+    func addSign(_ sign: String)
     func removeSign()
-    func changeStateTo(state: PasscodeLockStateType)
-    func authenticateWithBiometrics()
+    func changeState(_ state: PasscodeLockStateType)
+    func authenticateWithTouchID()
 }
 
 public protocol PasscodeLockTypeDelegate: class {
-    
-    func passcodeLockDidSucceed(lock: PasscodeLockType)
-    func passcodeLockDidFail(lock: PasscodeLockType)
-    func passcodeLockDidChangeState(lock: PasscodeLockType)
-    func passcodeLock(lock: PasscodeLockType, addedSignAtIndex index: Int)
-    func passcodeLock(lock: PasscodeLockType, removedSignAtIndex index: Int)
+    func passcodeLockDidSucceed(_ lock: PasscodeLockType)
+    func passcodeLockDidFail(_ lock: PasscodeLockType)
+    func passcodeLockDidChangeState(_ lock: PasscodeLockType)
+    func passcodeLock(_ lock: PasscodeLockType, addedSignAt index: Int)
+    func passcodeLock(_ lock: PasscodeLockType, removedSignAt index: Int)
 }

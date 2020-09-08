@@ -17,24 +17,18 @@ struct ChangePasscodeState: PasscodeLockStateType {
     
     init() {
         
-        title = localizedStringFor("PasscodeLockChangeTitle", comment: "Change passcode title")
-        description = localizedStringFor("PasscodeLockChangeDescription", comment: "Change passcode description")
+        title = localizedStringFor(key: "PasscodeLockChangeTitle", comment: "Change passcode title")
+        description = localizedStringFor(key: "PasscodeLockChangeDescription", comment: "Change passcode description")
     }
     
-    func acceptPasscode(passcode: [String], fromLock lock: PasscodeLockType) {
+    func accept(passcode: String, from lock: PasscodeLockType) {
         
-        guard let currentPasscode = lock.repository.passcode else {
-            return
-        }
+        if lock.repository.check(passcode: passcode) {
         
-        if passcode == currentPasscode {
-            
-            let nextState = SetPasscodeState()
-            
-            lock.changeStateTo(nextState)
-            
+            lock.changeState(SetPasscodeState())
+        
         } else {
-            
+        
             lock.delegate?.passcodeLockDidFail(lock)
         }
     }

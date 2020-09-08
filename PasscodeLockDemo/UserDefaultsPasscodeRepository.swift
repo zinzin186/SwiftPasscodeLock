@@ -9,38 +9,40 @@
 import Foundation
 import PasscodeLock
 
+public enum PasscodeError: Error {
+    case noPasscode
+}
+
 class UserDefaultsPasscodeRepository: PasscodeRepositoryType {
-    
     private let passcodeKey = "passcode.lock.passcode"
-    
-    private lazy var defaults: NSUserDefaults = {
-        
-        return NSUserDefaults.standardUserDefaults()
+
+    private lazy var defaults: UserDefaults = {
+        UserDefaults.standard
     }()
-    
+
     var hasPasscode: Bool {
-        
         if passcode != nil {
             return true
         }
-        
+
         return false
     }
-    
-    var passcode: [String]? {
-        
-        return defaults.valueForKey(passcodeKey) as? [String] ?? nil
+
+    private var passcode: String? {
+        return defaults.value(forKey: passcodeKey) as? String ?? nil
     }
-    
-    func savePasscode(passcode: [String]) {
-        
-        defaults.setObject(passcode, forKey: passcodeKey)
+
+    func save(passcode: String) {
+        defaults.set(passcode, forKey: passcodeKey)
         defaults.synchronize()
     }
-    
-    func deletePasscode() {
-        
-        defaults.removeObjectForKey(passcodeKey)
+
+    func check(passcode: String) -> Bool {
+        return self.passcode == passcode
+    }
+
+    func delete() {
+        defaults.removeObject(forKey: passcodeKey)
         defaults.synchronize()
     }
 }

@@ -1,30 +1,28 @@
 //
-//  EnterPasscodeState.swift
+//  RemovePasscodeState.swift
 //  PasscodeLock
 //
-//  Created by Yanko Dimitrov on 8/28/15.
-//  Copyright © 2015 Yanko Dimitrov. All rights reserved.
+//  Created by Kevin Seidel on 06/10/16.
+//  Copyright © 2016 Yanko Dimitrov. All rights reserved.
 //
 
 import Foundation
 
-public let PasscodeLockIncorrectPasscodeNotification = Notification.Name("passcode.lock.incorrect.passcode.notification")
-
-struct EnterPasscodeState: PasscodeLockStateType {
+struct RemovePasscodeState: PasscodeLockStateType {
     let title: String
     let description: String
-    let isCancellableAction: Bool
-    var isTouchIDAllowed = true
+    let isCancellableAction = false
+    var isTouchIDAllowed: Bool { return false }
     private var isNotificationSent = false
 
-    init(allowCancellation: Bool = false) {
-        isCancellableAction = allowCancellation
+    init() {
         title = "Nhập mã PIN để tiếp tục"
-        description = ""
+        description = "Ghi nhớ mã PIN để xem lại trò chuyện. Trò chuyện sẽ mất nếu bạn quên mã PIN"
     }
 
     mutating func accept(passcode: String, from lock: PasscodeLockType) {
         if lock.repository.check(passcode: passcode) {
+            lock.repository.delete()
             lock.delegate?.passcodeLockDidSucceed(lock)
             lock.configuration.setIncorrectPasscodeAttempts(0)
         } else {

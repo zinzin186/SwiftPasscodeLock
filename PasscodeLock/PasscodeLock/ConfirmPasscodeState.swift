@@ -15,30 +15,28 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
     let isCancellableAction = true
     var isTouchIDAllowed = false
     
-    private var passcodeToConfirm: [String]
+    private var passcodeToConfirm: String
     
-    init(passcode: [String]) {
+    init(passcode: String) {
         
         passcodeToConfirm = passcode
-        title = localizedStringFor("PasscodeLockConfirmTitle", comment: "Confirm passcode title")
-        description = localizedStringFor("PasscodeLockConfirmDescription", comment: "Confirm passcode description")
+        title = "Nhập lại mã PIN để xác nhận"
+        description = "Nhập lại mã PIN của bạn"
     }
     
-    func acceptPasscode(passcode: [String], fromLock lock: PasscodeLockType) {
+    func accept(passcode: String, from lock: PasscodeLockType) {
         
         if passcode == passcodeToConfirm {
             
-            lock.repository.savePasscode(passcode)
+            lock.repository.save(passcode: passcode)
             lock.delegate?.passcodeLockDidSucceed(lock)
         
         } else {
+            let mismatchTitle = "Mã PIN không đúng"
+            let mismatchDescription = "Thử lại sau 20 giây"
             
-            let mismatchTitle = localizedStringFor("PasscodeLockMismatchTitle", comment: "Passcode mismatch title")
-            let mismatchDescription = localizedStringFor("PasscodeLockMismatchDescription", comment: "Passcode mismatch description")
+            lock.changeState(SetPasscodeState(title: mismatchTitle, description: mismatchDescription))
             
-            let nextState = SetPasscodeState(title: mismatchTitle, description: mismatchDescription)
-            
-            lock.changeStateTo(nextState)
             lock.delegate?.passcodeLockDidFail(lock)
         }
     }
