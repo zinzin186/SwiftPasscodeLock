@@ -22,5 +22,24 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
+    <key>UIAppFonts</key>
+    <array>
+        <string>SF-Pro-Display-Bold.otf</string>
+        <string>SF-Pro-Text-Regular.otf</string>
+        <string>SF-Pro-Text-Bold.otf</string>
+        <string>SF-Pro-Text-Medium.otf</string>
+        <string>SF-Pro-Display-Medium.otf</string>
+        <string>SF-Pro-Display-Regular.otf</string>
+        <string>BalooPaaji-Regular.ttf</string>
+        <string>Nunito-Regular.ttf</string>
+        <string>Oswald-Regular.ttf</string>
+        <string>HeptaSlab-Regular.ttf</string>
+        <string>DancingScript-Regular.ttf</string>
+        <string>Pacifico-Regular.ttf</string>
+        <string>JustLovely-Roman.ttf</string>
+        <string>Outfitter-Script.ttf</string>
+        <string>SF-Pro-Display-Semibold.ttf</string>
+        <string>SF-Pro-Text-Semibold.ttf</string>
+    </array>
 </dict>
 </plist>

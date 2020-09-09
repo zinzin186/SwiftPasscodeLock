@@ -89,4 +89,23 @@ class PasscodeSettingsViewController: UIViewController {
     @IBAction func dismissKeyboard() {
         testTextField.resignFirstResponder()
     }
+    
+    
+    @IBAction func set(_ sender: Any) {
+        let passcodeVC = PasscodeLockViewController(state: .set, configuration: configuration)
+        present(passcodeVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func enter(_ sender: Any) {
+        let passcodeVC = PasscodeLockViewController(state: .enter, configuration: configuration)
+        present(passcodeVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func remove(_ sender: Any) {
+        let passcodeVC = PasscodeLockViewController(state: .remove, configuration: configuration)
+        present(passcodeVC, animated: true, completion: nil)
+    }
+    
+    
+    
 }

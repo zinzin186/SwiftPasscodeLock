@@ -17,15 +17,15 @@ struct ChangePasscodeState: PasscodeLockStateType {
     
     init() {
         
-        title = localizedStringFor(key: "PasscodeLockChangeTitle", comment: "Change passcode title")
-        description = localizedStringFor(key: "PasscodeLockChangeDescription", comment: "Change passcode description")
+        title = "Nhập mã PIN cũ"
+        description = ""
     }
     
     func accept(passcode: String, from lock: PasscodeLockType) {
         
         if lock.repository.check(passcode: passcode) {
         
-            lock.changeState(SetPasscodeState())
+            lock.changeState(SetNewPasscodeState())
         
         } else {
         

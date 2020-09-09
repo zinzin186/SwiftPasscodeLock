@@ -18,7 +18,7 @@ open class PasscodeSignPlaceholderView: UIView {
     }
 
     @IBInspectable
-    open var cornerRadius: CGFloat = 8 {
+    open var cornerRadius: CGFloat = 6.5 {
         didSet {
             setupView()
         }
@@ -59,7 +59,7 @@ open class PasscodeSignPlaceholderView: UIView {
     
     open override var intrinsicContentSize : CGSize {
         
-        return CGSize(width: 16, height: 16)
+        return CGSize(width: 13, height: 13)
     }
     
     private func setupView() {

@@ -22,6 +22,7 @@ public enum LockState {
         }
     }
 }
+
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
     
     
@@ -31,6 +32,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         return bundleForResource(name: nibName, ofType: "nib")
     }
 
+    
+    
+    
     @IBOutlet open var placeholders: [PasscodeSignPlaceholderView] = [PasscodeSignPlaceholderView]()
     @IBOutlet open weak var titleLabel: UILabel?
     @IBOutlet open weak var descriptionLabel: UILabel?
@@ -39,6 +43,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet weak var forgotCodeButton: UIButton!
     
     open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
+    open var gotCallback: ((_ lock: PasscodeLockType) -> Void)?
     open var dismissCompletionCallback: (() -> Void)?
     open var animateOnDismiss: Bool
     open var notificationCenter: NotificationCenter?
@@ -76,6 +81,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     public required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    open override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
 
     deinit {
         clearEvents()
@@ -102,6 +110,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     internal func updatePasscodeView() {
         titleLabel?.text = passcodeLock.state.title
         descriptionLabel?.text = passcodeLock.state.description
+        self.descriptionLabel?.isHidden = true
         
 //        cancelButton?.isHidden = !passcodeLock.state.isCancellableAction
     }
@@ -220,8 +229,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
 
     open func passcodeLockDidFail(_ lock: PasscodeLockType) {
+        self.titleLabel?.text = "Mã PIN không đúng"
         animateWrongPassword()
-        if self.stage == LockState.enter{
+        if self.stage == LockState.enter || self.stage == LockState.change{
             maxNumberEnterWrong -= 1
             if maxNumberEnterWrong <= 0{
                 //Qua 5 lan cho phep nhap ma PIN sai

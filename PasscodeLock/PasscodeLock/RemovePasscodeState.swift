@@ -17,7 +17,7 @@ struct RemovePasscodeState: PasscodeLockStateType {
 
     init() {
         title = "Nhập mã PIN để tiếp tục"
-        description = "Ghi nhớ mã PIN để xem lại trò chuyện. Trò chuyện sẽ mất nếu bạn quên mã PIN"
+        description = ""
     }
 
     mutating func accept(passcode: String, from lock: PasscodeLockType) {

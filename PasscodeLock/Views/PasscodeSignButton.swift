@@ -21,7 +21,7 @@ open class PasscodeSignButton: UIButton {
     }
 
     @IBInspectable
-    open var borderRadius: CGFloat = 38.5 {
+    open var borderRadius: CGFloat = 37.5 {
         didSet {
             setupView()
         }
@@ -34,6 +34,7 @@ open class PasscodeSignButton: UIButton {
         }
     }
 
+    open var fontSize: CGFloat = 36
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -59,7 +60,7 @@ open class PasscodeSignButton: UIButton {
         layer.borderColor = borderColor.cgColor
         self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = defaultBackgroundColor
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 36)
+//        self.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
     }
 
     private func setupActions() {

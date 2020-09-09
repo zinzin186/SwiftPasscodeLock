@@ -23,13 +23,41 @@ struct SetPasscodeState: PasscodeLockStateType {
     
     init() {
         
-        title = "Nhập mã PIN cho trò chuyện bí mật"
-        description = "Ghi nhớ mã PIN để xem lại trò chuyện. Trò chuyện sẽ mất nếu bạn quên mã PIN"
+        title = "Tạo mã PIN cho\nTrò chuyện bí mật"
+        description = ""
+    }
+    
+    func accept(passcode: String, from lock: PasscodeLockType) {
+//        if lock.repository.check(passcode: passcode) {
+//            lock.delegate?.passcodeLockDidSucceed(lock)
+//            lock.configuration.setIncorrectPasscodeAttempts(0)
+//        }
+        lock.changeState(ConfirmPasscodeState(passcode: passcode))
+
+    }
+}
+struct SetNewPasscodeState: PasscodeLockStateType {
+    
+    let title: String
+    let description: String
+    let isCancellableAction = true
+    var isTouchIDAllowed = false
+    
+    init(title: String, description: String) {
+        
+        self.title = title
+        self.description = description
+    }
+    
+    init() {
+        
+        title = "Nhập mã PIN mới"
+        description = ""
     }
     
     func accept(passcode: String, from lock: PasscodeLockType) {
         
-        lock.changeState(ConfirmPasscodeState(passcode: passcode))
+        lock.changeState(ConfirmNewPasscodeState(passcode: passcode))
 
     }
 }

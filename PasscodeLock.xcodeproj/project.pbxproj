@@ -9,6 +9,23 @@
 /* Begin PBXBuildFile section */
 		0A526E151DA6786200114A5E /* RemovePasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A526E141DA6786200114A5E /* RemovePasscodeState.swift */; };
 		3D38781725064CE800212C01 /* CountDownable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D38781625064CE800212C01 /* CountDownable.swift */; };
+		3D3878502508748D00212C01 /* PasscodeAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D38784F2508748D00212C01 /* PasscodeAsset.xcassets */; };
+		3D3878622508781900212C01 /* BalooPaaji-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878522508781900212C01 /* BalooPaaji-Regular.ttf */; };
+		3D3878632508781900212C01 /* SF-Pro-Display-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878532508781900212C01 /* SF-Pro-Display-Semibold.ttf */; };
+		3D3878642508781900212C01 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878542508781900212C01 /* SF-Pro-Display-Regular.otf */; };
+		3D3878652508781900212C01 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878552508781900212C01 /* SF-Pro-Display-Bold.otf */; };
+		3D3878662508781900212C01 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878562508781900212C01 /* SF-Pro-Display-Medium.otf */; };
+		3D3878672508781900212C01 /* JustLovely-Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878572508781900212C01 /* JustLovely-Roman.ttf */; };
+		3D3878682508781900212C01 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878582508781900212C01 /* Nunito-Regular.ttf */; };
+		3D3878692508781900212C01 /* SF-Pro-Text-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878592508781900212C01 /* SF-Pro-Text-Semibold.ttf */; };
+		3D38786A2508781900212C01 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785A2508781900212C01 /* Oswald-Regular.ttf */; };
+		3D38786B2508781900212C01 /* Outfitter-Script.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785B2508781900212C01 /* Outfitter-Script.ttf */; };
+		3D38786C2508781900212C01 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785C2508781900212C01 /* SF-Pro-Text-Regular.otf */; };
+		3D38786D2508781900212C01 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785D2508781900212C01 /* SF-Pro-Text-Bold.otf */; };
+		3D38786E2508781900212C01 /* HeptaSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785E2508781900212C01 /* HeptaSlab-Regular.ttf */; };
+		3D38786F2508781900212C01 /* DancingScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785F2508781900212C01 /* DancingScript-Regular.ttf */; };
+		3D3878702508781900212C01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878602508781900212C01 /* Pacifico-Regular.ttf */; };
+		3D3878712508781900212C01 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878612508781900212C01 /* SF-Pro-Text-Medium.otf */; };
 		C99EAF431B90B05700D61E1B /* PasscodeLock.h in Headers */ = {isa = PBXBuildFile; fileRef = C99EAF421B90B05700D61E1B /* PasscodeLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C99EAF4A1B90B05800D61E1B /* PasscodeLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99EAF3F1B90B05700D61E1B /* PasscodeLock.framework */; };
 		C9D3DF0B1B919CE4008561EB /* PasscodeLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D3DF0A1B919CE4008561EB /* PasscodeLockView.xib */; };
@@ -108,6 +125,23 @@
 /* Begin PBXFileReference section */
 		0A526E141DA6786200114A5E /* RemovePasscodeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemovePasscodeState.swift; sourceTree = "<group>"; };
 		3D38781625064CE800212C01 /* CountDownable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownable.swift; sourceTree = "<group>"; };
+		3D38784F2508748D00212C01 /* PasscodeAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PasscodeAsset.xcassets; sourceTree = "<group>"; };
+		3D3878522508781900212C01 /* BalooPaaji-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BalooPaaji-Regular.ttf"; sourceTree = "<group>"; };
+		3D3878532508781900212C01 /* SF-Pro-Display-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.ttf"; sourceTree = "<group>"; };
+		3D3878542508781900212C01 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		3D3878552508781900212C01 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		3D3878562508781900212C01 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		3D3878572508781900212C01 /* JustLovely-Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JustLovely-Roman.ttf"; sourceTree = "<group>"; };
+		3D3878582508781900212C01 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		3D3878592508781900212C01 /* SF-Pro-Text-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.ttf"; sourceTree = "<group>"; };
+		3D38785A2508781900212C01 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		3D38785B2508781900212C01 /* Outfitter-Script.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfitter-Script.ttf"; sourceTree = "<group>"; };
+		3D38785C2508781900212C01 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		3D38785D2508781900212C01 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
+		3D38785E2508781900212C01 /* HeptaSlab-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HeptaSlab-Regular.ttf"; sourceTree = "<group>"; };
+		3D38785F2508781900212C01 /* DancingScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DancingScript-Regular.ttf"; sourceTree = "<group>"; };
+		3D3878602508781900212C01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
+		3D3878612508781900212C01 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
 		C99EAF3F1B90B05700D61E1B /* PasscodeLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PasscodeLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99EAF421B90B05700D61E1B /* PasscodeLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasscodeLock.h; sourceTree = "<group>"; };
 		C99EAF441B90B05700D61E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -198,6 +232,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D3878512508781900212C01 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3D3878522508781900212C01 /* BalooPaaji-Regular.ttf */,
+				3D3878532508781900212C01 /* SF-Pro-Display-Semibold.ttf */,
+				3D3878542508781900212C01 /* SF-Pro-Display-Regular.otf */,
+				3D3878552508781900212C01 /* SF-Pro-Display-Bold.otf */,
+				3D3878562508781900212C01 /* SF-Pro-Display-Medium.otf */,
+				3D3878572508781900212C01 /* JustLovely-Roman.ttf */,
+				3D3878582508781900212C01 /* Nunito-Regular.ttf */,
+				3D3878592508781900212C01 /* SF-Pro-Text-Semibold.ttf */,
+				3D38785A2508781900212C01 /* Oswald-Regular.ttf */,
+				3D38785B2508781900212C01 /* Outfitter-Script.ttf */,
+				3D38785C2508781900212C01 /* SF-Pro-Text-Regular.otf */,
+				3D38785D2508781900212C01 /* SF-Pro-Text-Bold.otf */,
+				3D38785E2508781900212C01 /* HeptaSlab-Regular.ttf */,
+				3D38785F2508781900212C01 /* DancingScript-Regular.ttf */,
+				3D3878602508781900212C01 /* Pacifico-Regular.ttf */,
+				3D3878612508781900212C01 /* SF-Pro-Text-Medium.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C99EAF351B90B05700D61E1B = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +283,7 @@
 		C99EAF411B90B05700D61E1B /* PasscodeLock */ = {
 			isa = PBXGroup;
 			children = (
+				3D3878512508781900212C01 /* Fonts */,
 				C9DC07D21B90B1CE007A4DD0 /* Protocols */,
 				C9DC07D11B90B1CE007A4DD0 /* PasscodeLock */,
 				C9DC07D31B90B1CE007A4DD0 /* Views */,
@@ -291,6 +349,7 @@
 				C9DC08041B90D394007A4DD0 /* ChangePasscodeState.swift */,
 				0A526E141DA6786200114A5E /* RemovePasscodeState.swift */,
 				3D38781625064CE800212C01 /* CountDownable.swift */,
+				3D38784F2508748D00212C01 /* PasscodeAsset.xcassets */,
 			);
 			path = PasscodeLock;
 			sourceTree = "<group>";
@@ -508,8 +567,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D3878682508781900212C01 /* Nunito-Regular.ttf in Resources */,
+				3D3878662508781900212C01 /* SF-Pro-Display-Medium.otf in Resources */,
 				C9DC07FC1B90D0A3007A4DD0 /* PasscodeLock.strings in Resources */,
 				C9D3DF0B1B919CE4008561EB /* PasscodeLockView.xib in Resources */,
+				3D38786E2508781900212C01 /* HeptaSlab-Regular.ttf in Resources */,
+				3D3878692508781900212C01 /* SF-Pro-Text-Semibold.ttf in Resources */,
+				3D3878632508781900212C01 /* SF-Pro-Display-Semibold.ttf in Resources */,
+				3D38786C2508781900212C01 /* SF-Pro-Text-Regular.otf in Resources */,
+				3D38786B2508781900212C01 /* Outfitter-Script.ttf in Resources */,
+				3D3878702508781900212C01 /* Pacifico-Regular.ttf in Resources */,
+				3D3878672508781900212C01 /* JustLovely-Roman.ttf in Resources */,
+				3D38786F2508781900212C01 /* DancingScript-Regular.ttf in Resources */,
+				3D38786A2508781900212C01 /* Oswald-Regular.ttf in Resources */,
+				3D3878502508748D00212C01 /* PasscodeAsset.xcassets in Resources */,
+				3D38786D2508781900212C01 /* SF-Pro-Text-Bold.otf in Resources */,
+				3D3878652508781900212C01 /* SF-Pro-Display-Bold.otf in Resources */,
+				3D3878642508781900212C01 /* SF-Pro-Display-Regular.otf in Resources */,
+				3D3878712508781900212C01 /* SF-Pro-Text-Medium.otf in Resources */,
+				3D3878622508781900212C01 /* BalooPaaji-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +878,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PasscodeLock/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -826,6 +903,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PasscodeLock/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -879,7 +957,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6HPG35RJ6Y;
 				INFOPLIST_FILE = PasscodeLockDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -899,7 +977,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 6HPG35RJ6Y;
 				INFOPLIST_FILE = PasscodeLockDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
