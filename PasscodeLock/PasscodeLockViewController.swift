@@ -54,7 +54,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
 
     private var shouldTryToAuthenticateWithBiometrics = true
     private var stage: LockState = .set
-    private var maxNumberEnterWrong: Int = 5
+    open var maxNumberEnterWrong: Int = 3
     private let timeToEnableEnterPIN: Int = 20
     private var timeCountDownEnterPIN: Int = 20
     private var remainCountdown = 0
@@ -221,7 +221,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         cancelButton?.isSelected = false
         animatePlaceholders(placeholders, toState: .inactive)
         if self.stage == LockState.enter{
-            maxNumberEnterWrong = 5
+            maxNumberEnterWrong = 3
         }
         dismissPasscodeLock(lock) { [weak self] in
             self?.successCallback?(lock)
@@ -269,6 +269,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             }
             
             DispatchQueue.main.async { [weak self] in
+                self?.maxNumberEnterWrong = 3
                 self?.updateUIWhenCoundown(seconds: self?.timeCountDownEnterPIN ?? 0)
             }
         }
