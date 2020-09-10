@@ -43,7 +43,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet weak var forgotCodeButton: UIButton!
     
     open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
-    open var gotCallback: ((_ lock: PasscodeLockType) -> Void)?
+    open var forgotPasscodeCallback: (() -> Void)?
+    open var enterPasscodeCallback: ((_ pass: String, _ isEnableEnterPIN: Bool) -> Void)?
     open var dismissCompletionCallback: (() -> Void)?
     open var animateOnDismiss: Bool
     open var notificationCenter: NotificationCenter?
@@ -86,6 +87,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
 
     deinit {
+        resetTimer()
         clearEvents()
     }
 
@@ -95,6 +97,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         super.viewDidLoad()
         updatePasscodeView()
         setupEvents()
+        checkContinueCountdown()
+        if stage == .enter{
+            forgotCodeButton.isHidden = false
+        }else{
+            forgotCodeButton.isHidden = true
+        }
     }
 
     
@@ -139,8 +147,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
 
     @IBAction func passcodeSignButtonTap(_ sender: PasscodeSignButton) {
         guard isPlaceholdersAnimationCompleted else { return }
+        if let enterPasscodeCallback = self.enterPasscodeCallback{
+            enterPasscodeCallback(sender.passcodeSign, isEnableEnterPIN)
+        }
         guard isEnableEnterPIN else {
-            print("Counting time")
+            print("DisableEnterPIN")
             return
         }
         passcodeLock.addSign(sender.passcodeSign)
@@ -155,6 +166,9 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
 
     @IBAction func getPassCode(_ sender: Any) {
+        if let forgotPasscodeCallback = self.forgotPasscodeCallback{
+            forgotPasscodeCallback()
+        }
     }
     private func authenticateWithTouchID() {
         if passcodeConfiguration.shouldRequestTouchIDImmediately && passcodeLock.isTouchIDAllowed {
@@ -236,6 +250,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             if maxNumberEnterWrong <= 0{
                 //Qua 5 lan cho phep nhap ma PIN sai
                 //Thu lai sau 20 giay
+                saveCountdown()
                 self.startCountDownToEnableUnlock()
             }
         }
@@ -305,4 +320,25 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             cancelButton?.isSelected = true
         }
     }
+}
+extension PasscodeLockViewController{
+    public func checkContinueCountdown() {
+        let countdown = remainCountdownTime()
+        if countdown > 0 {
+            remainCountdown = countdown
+            self.startCountDownToEnableUnlock()
+        }
+    }
+    public func remainCountdownTime() -> Int {
+        guard let timeInterval = UserDefaults.standard.value(forKey: "TIME_COUNT_DOWN") as? Int else  {return 0}
+        let lastTime = TimeInterval(timeInterval)
+        let spaceTime = timeToEnableEnterPIN - Int((Date().timeIntervalSince1970 - lastTime))
+        return spaceTime
+    }
+    public func saveCountdown() {
+        let timeInterval = Date().timeIntervalSince1970
+        UserDefaults.standard.set(Int(timeInterval), forKey: "TIME_COUNT_DOWN")
+        UserDefaults.standard.synchronize()
+    }
+    
 }
