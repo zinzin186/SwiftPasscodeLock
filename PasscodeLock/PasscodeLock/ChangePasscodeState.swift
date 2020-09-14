@@ -26,6 +26,11 @@ struct ChangePasscodeState: PasscodeLockStateType {
             if isVerify{
                 lock.changeState(SetNewPasscodeState())
             }else{
+                if lock.configuration.getIncorrectPasscodeAttempts() >= lock.configuration.maximumIncorrectPasscodeAttempts {
+                    NotificationCenter.default.post(name: PasscodeLockIncorrectPasscodeNotification, object: nil)
+                    lock.configuration.setIncorrectPasscodeAttempts(0)
+                }
+
                 lock.delegate?.passcodeLockDidFail(lock)
             }
         }

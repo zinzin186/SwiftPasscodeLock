@@ -132,7 +132,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     private func clearEvents() {
         notificationCenter?.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         notificationCenter?.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
-        notificationCenter?.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter?.removeObserver(self, name: PasscodeLockIncorrectPasscodeNotification, object: nil)
     }
 
     @objc open func appWillEnterForegroundHandler(_ notification: Notification) {
