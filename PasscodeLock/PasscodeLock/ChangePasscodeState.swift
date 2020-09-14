@@ -22,14 +22,21 @@ struct ChangePasscodeState: PasscodeLockStateType {
     }
     
     func accept(passcode: String, from lock: PasscodeLockType) {
-        
-        if lock.repository.check(passcode: passcode) {
-        
-            lock.changeState(SetNewPasscodeState())
-        
-        } else {
-        
-            lock.delegate?.passcodeLockDidFail(lock)
+        lock.repository.check(passcode: passcode) { (isVerify) in
+            if isVerify{
+                lock.changeState(SetNewPasscodeState())
+            }else{
+                lock.delegate?.passcodeLockDidFail(lock)
+            }
         }
+        
+//        if lock.repository.check(passcode: passcode) {
+//
+//            lock.changeState(SetNewPasscodeState())
+//
+//        } else {
+//
+//            lock.delegate?.passcodeLockDidFail(lock)
+//        }
     }
 }

@@ -55,7 +55,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
 
     private var shouldTryToAuthenticateWithBiometrics = true
     private var stage: LockState = .set
-    open var maxNumberEnterWrong: Int = 3
     private let timeToEnableEnterPIN: Int = 20
     private var timeCountDownEnterPIN: Int = 20
     private var remainCountdown = 0
@@ -103,6 +102,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         }else{
             forgotCodeButton.isHidden = true
         }
+        
     }
 
     
@@ -119,8 +119,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         titleLabel?.text = passcodeLock.state.title
         descriptionLabel?.text = passcodeLock.state.description
         self.descriptionLabel?.isHidden = true
-        
-//        cancelButton?.isHidden = !passcodeLock.state.isCancellableAction
     }
 
     // MARK: - Events
@@ -128,10 +126,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     private func setupEvents() {
         notificationCenter?.addObserver(self, selector: #selector(PasscodeLockViewController.appWillEnterForegroundHandler(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
         notificationCenter?.addObserver(self, selector: #selector(PasscodeLockViewController.appDidEnterBackgroundHandler(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter?.addObserver(self, selector: #selector(showCoundownWhenOverMaxIncorrect), name: PasscodeLockIncorrectPasscodeNotification, object: nil)
     }
 
     private func clearEvents() {
         notificationCenter?.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        notificationCenter?.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter?.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
 
@@ -234,9 +234,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open func passcodeLockDidSucceed(_ lock: PasscodeLockType) {
         cancelButton?.isSelected = false
         animatePlaceholders(placeholders, toState: .inactive)
-        if self.stage == LockState.enter{
-            maxNumberEnterWrong = 3
-        }
         dismissPasscodeLock(lock) { [weak self] in
             self?.successCallback?(lock)
         }
@@ -245,17 +242,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open func passcodeLockDidFail(_ lock: PasscodeLockType) {
         self.titleLabel?.text = "Mã PIN không đúng"
         animateWrongPassword()
-        if self.stage == LockState.enter || self.stage == LockState.change{
-            maxNumberEnterWrong -= 1
-            if maxNumberEnterWrong <= 0{
-                //Qua 5 lan cho phep nhap ma PIN sai
-                //Thu lai sau 20 giay
-                saveCountdown()
-                self.startCountDownToEnableUnlock()
-            }
-        }
     }
 
+    @objc private func showCoundownWhenOverMaxIncorrect(){
+        saveCountdown()
+        startCountDownToEnableUnlock()
+    }
     private func startCountDownToEnableUnlock(){
         self.descriptionLabel?.isHidden = false
         startTimer()
@@ -284,7 +276,6 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             }
             
             DispatchQueue.main.async { [weak self] in
-                self?.maxNumberEnterWrong = 3
                 self?.updateUIWhenCoundown(seconds: self?.timeCountDownEnterPIN ?? 0)
             }
         }

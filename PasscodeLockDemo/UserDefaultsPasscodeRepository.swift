@@ -37,8 +37,11 @@ class UserDefaultsPasscodeRepository: PasscodeRepositoryType {
         defaults.synchronize()
     }
 
-    func check(passcode: String) -> Bool {
-        return self.passcode == passcode
+    func check(passcode: String, completion: @escaping(_ isVerify: Bool)->Void){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            completion(self.passcode == passcode)
+        }
+//        return self.passcode == passcode
     }
 
     func delete() {

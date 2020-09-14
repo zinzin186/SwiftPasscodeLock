@@ -15,7 +15,6 @@ struct EnterPasscodeState: PasscodeLockStateType {
     let description: String
     let isCancellableAction: Bool
     var isTouchIDAllowed = true
-    private var isNotificationSent = false
 
     init(allowCancellation: Bool = false) {
         isCancellableAction = allowCancellation
@@ -24,24 +23,41 @@ struct EnterPasscodeState: PasscodeLockStateType {
     }
 
     mutating func accept(passcode: String, from lock: PasscodeLockType) {
-        if lock.repository.check(passcode: passcode) {
-            lock.delegate?.passcodeLockDidSucceed(lock)
-            lock.configuration.setIncorrectPasscodeAttempts(0)
-        } else {
-            let oldValue = lock.configuration.getIncorrectPasscodeAttempts()
-            lock.configuration.setIncorrectPasscodeAttempts(oldValue + 1)
+        lock.repository.check(passcode: passcode) { (isVerify) in
+            if isVerify{
+                lock.delegate?.passcodeLockDidSucceed(lock)
+                lock.configuration.setIncorrectPasscodeAttempts(0)
+            }else{
+                let oldValue = lock.configuration.getIncorrectPasscodeAttempts()
+                lock.configuration.setIncorrectPasscodeAttempts(oldValue + 1)
 
-            if lock.configuration.getIncorrectPasscodeAttempts() >= lock.configuration.maximumIncorrectPasscodeAttempts {
-                postNotification()
+                if lock.configuration.getIncorrectPasscodeAttempts() >= lock.configuration.maximumIncorrectPasscodeAttempts {
+                    NotificationCenter.default.post(name: PasscodeLockIncorrectPasscodeNotification, object: nil)
+                    lock.configuration.setIncorrectPasscodeAttempts(0)
+                }
+
+                lock.delegate?.passcodeLockDidFail(lock)
             }
-
-            lock.delegate?.passcodeLockDidFail(lock)
         }
+        
+        
+//        if lock.repository.check(passcode: passcode) {
+//            lock.delegate?.passcodeLockDidSucceed(lock)
+//            lock.configuration.setIncorrectPasscodeAttempts(0)
+//        } else {
+//            let oldValue = lock.configuration.getIncorrectPasscodeAttempts()
+//            lock.configuration.setIncorrectPasscodeAttempts(oldValue + 1)
+//
+//            if lock.configuration.getIncorrectPasscodeAttempts() >= lock.configuration.maximumIncorrectPasscodeAttempts {
+//                postNotification()
+//                lock.configuration.setIncorrectPasscodeAttempts(0)
+//            }
+//
+//            lock.delegate?.passcodeLockDidFail(lock)
+//        }
     }
 
     private mutating func postNotification() {
-        guard !isNotificationSent else { return }
         NotificationCenter.default.post(name: PasscodeLockIncorrectPasscodeNotification, object: nil)
-        isNotificationSent = true
     }
 }
