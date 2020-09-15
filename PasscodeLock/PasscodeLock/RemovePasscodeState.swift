@@ -20,10 +20,8 @@ struct RemovePasscodeState: PasscodeLockStateType {
     }
 
     mutating func accept(passcode: String, from lock: PasscodeLockType) {
-        
-        lock.repository.check(passcode: passcode) { (isVerify) in
-            if isVerify{
-                lock.repository.delete()
+        lock.repository.delete { (isSucceed) in
+            if isSucceed{
                 lock.delegate?.passcodeLockDidSucceed(lock)
                 lock.configuration.setIncorrectPasscodeAttempts(0)
             }else{
@@ -38,21 +36,6 @@ struct RemovePasscodeState: PasscodeLockStateType {
                 lock.delegate?.passcodeLockDidFail(lock)
             }
         }
-//        if lock.repository.check(passcode: passcode) {
-//            lock.repository.delete()
-//            lock.delegate?.passcodeLockDidSucceed(lock)
-//            lock.configuration.setIncorrectPasscodeAttempts(0)
-//        } else {
-//            let oldValue = lock.configuration.getIncorrectPasscodeAttempts()
-//            lock.configuration.setIncorrectPasscodeAttempts(oldValue + 1)
-//
-//            if lock.configuration.getIncorrectPasscodeAttempts() >= lock.configuration.maximumIncorrectPasscodeAttempts {
-//                postNotification()
-//                lock.configuration.setIncorrectPasscodeAttempts(0)
-//            }
-//
-//            lock.delegate?.passcodeLockDidFail(lock)
-//        }
     }
 
     private mutating func postNotification() {

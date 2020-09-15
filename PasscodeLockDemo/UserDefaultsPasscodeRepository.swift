@@ -14,6 +14,8 @@ public enum PasscodeError: Error {
 }
 
 class UserDefaultsPasscodeRepository: PasscodeRepositoryType {
+    
+    
     private let passcodeKey = "passcode.lock.passcode"
 
     private lazy var defaults: UserDefaults = {
@@ -32,20 +34,28 @@ class UserDefaultsPasscodeRepository: PasscodeRepositoryType {
         return defaults.value(forKey: passcodeKey) as? String ?? nil
     }
 
-    func save(passcode: String) {
-        defaults.set(passcode, forKey: passcodeKey)
-        defaults.synchronize()
+    func save(passcode: String, completion: @escaping (_ isSucceed: Bool)->Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {[weak self] in
+            guard let self = self else {return}
+            self.defaults.set(passcode, forKey: self.passcodeKey)
+            self.defaults.synchronize()
+            completion(true)
+        }
+        
     }
 
     func check(passcode: String, completion: @escaping(_ isVerify: Bool)->Void){
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             completion(self.passcode == passcode)
         }
-//        return self.passcode == passcode
     }
 
-    func delete() {
-        defaults.removeObject(forKey: passcodeKey)
-        defaults.synchronize()
+    func delete(completion: @escaping (_ isSucceed: Bool)->Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {[weak self] in
+            guard let self = self else {return}
+            self.defaults.removeObject(forKey: self.passcodeKey)
+            self.defaults.synchronize()
+            completion(true)
+        }
     }
 }

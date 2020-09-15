@@ -12,8 +12,9 @@ public protocol PasscodeRepositoryType {
     
     var hasPasscode: Bool { get }
     
-    func save(passcode: String)
+//    func save(passcode: String)
 //    func check(passcode: String) -> Bool
     func check(passcode: String, completion: @escaping(_ isVerify: Bool)->Void)
-    func delete()
+    func save(passcode: String, completion: @escaping(_ isSucceed: Bool)->Void)
+    func delete(completion: @escaping(_ isSucceed: Bool)->Void)
 }
