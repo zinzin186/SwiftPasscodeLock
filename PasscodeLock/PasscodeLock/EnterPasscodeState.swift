@@ -25,7 +25,7 @@ struct EnterPasscodeState: PasscodeLockStateType {
     mutating func accept(passcode: String, from lock: PasscodeLockType) {
         lock.repository.check(passcode: passcode) { (isVerify) in
             if isVerify{
-                lock.delegate?.passcodeLockConfirmDidSucceed(lock)
+                lock.delegate?.passcodeLockConfirmDidSucceed(lock, passcode: passcode)
                 lock.configuration.setIncorrectPasscodeAttempts(0)
             }else{
                 let oldValue = lock.configuration.getIncorrectPasscodeAttempts()

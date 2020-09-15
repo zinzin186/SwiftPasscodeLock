@@ -26,7 +26,7 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
     
     func accept(passcode: String, from lock: PasscodeLockType) {
         if passcode == passcodeToConfirm {
-            lock.delegate?.passcodeLockConfirmDidSucceed(lock)
+            lock.delegate?.passcodeLockConfirmDidSucceed(lock, passcode: passcode)
         } else {
             lock.delegate?.passcodeLockConfirmDidFail(lock)
         }
@@ -51,7 +51,7 @@ struct ConfirmNewPasscodeState: PasscodeLockStateType {
     
     func accept(passcode: String, from lock: PasscodeLockType) {
         if passcode == passcodeToConfirm {
-            lock.delegate?.passcodeLockConfirmDidSucceed(lock)
+            lock.delegate?.passcodeLockConfirmDidSucceed(lock, passcode: passcode)
         } else {
             lock.delegate?.passcodeLockConfirmDidFail(lock)
         }

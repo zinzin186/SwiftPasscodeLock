@@ -22,7 +22,7 @@ struct RemovePasscodeState: PasscodeLockStateType {
     mutating func accept(passcode: String, from lock: PasscodeLockType) {
         lock.repository.delete { (isSucceed) in
             if isSucceed{
-                lock.delegate?.passcodeLockConfirmDidSucceed(lock)
+                lock.delegate?.passcodeLockConfirmDidSucceed(lock, passcode: passcode)
                 lock.configuration.setIncorrectPasscodeAttempts(0)
             }else{
                 let oldValue = lock.configuration.getIncorrectPasscodeAttempts()

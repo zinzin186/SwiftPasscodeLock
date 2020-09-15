@@ -41,7 +41,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet weak var forgotCodeButton: UIButton!
     
-    open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
+//    open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
     open var forgotPasscodeCallback: (() -> Void)?
     open var enterPasscodeCallback: ((_ passcode: String, _ isEnableEnterPIN: Bool) -> Void)?
     open var enterFullPasscodeCallback: ((_ passcode: String) -> Void)?
@@ -61,12 +61,14 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     private var timer: RepeatingTimer?
     private var isEnableEnterPIN: Bool = true
     private var passcodeLockStateType: PasscodeLockStateType
+    private var maximumIncorrectPasscodeAttempts: Int = 3
     // MARK: - Initializers
 
     public init(state: PasscodeLockStateType, configuration: PasscodeLockConfigurationType, animateOnDismiss: Bool = true) {
         self.passcodeLockStateType = state
         self.animateOnDismiss = animateOnDismiss
         passcodeConfiguration = configuration
+        self.maximumIncorrectPasscodeAttempts = configuration.maximumIncorrectPasscodeAttempts
         passcodeLock = PasscodeLock(state: state, configuration: configuration)
         let this = type(of: self)
         super.init(nibName: this.nibName, bundle: this.nibBundle)
@@ -233,11 +235,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
 
     // MARK: - PasscodeLockDelegate
 
-    open func passcodeLockConfirmDidSucceed(_ lock: PasscodeLockType) {
+    open func passcodeLockConfirmDidSucceed(_ lock: PasscodeLockType, passcode: String) {
         cancelButton?.isSelected = false
         animatePlaceholders(placeholders, toState: .inactive)
         dismissPasscodeLock(lock) { [weak self] in
-            self?.successCallback?(lock)
+            self?.enterFullPasscodeCallback?(passcode)
         }
     }
 
@@ -268,13 +270,14 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         resetTimer()
         self.isEnableEnterPIN = false
         timer = RepeatingTimer(timeInterval: 1)
-        timer?.eventHandler = {
-            
+        timer?.eventHandler = {[weak self] in
+            guard let self = self else {return}
             if self.timeCountDownEnterPIN > 0 {
                 self.timeCountDownEnterPIN -= 1
             } else {
                 self.resetTimer()
                 self.timeCountDownEnterPIN = 0
+                self.maximumIncorrectPasscodeAttempts = self.passcodeConfiguration.maximumIncorrectPasscodeAttempts
             }
             
             DispatchQueue.main.async { [weak self] in
@@ -326,6 +329,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
                 passcodeLock.changeState(SetNewPasscodeState())
             }
         }else{
+            self.maximumIncorrectPasscodeAttempts -= 1
+            if self.maximumIncorrectPasscodeAttempts == 0{
+                showCoundownWhenOverMaxIncorrect()
+            }
             animateWrongPassword()
         }
         

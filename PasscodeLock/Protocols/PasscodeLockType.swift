@@ -22,7 +22,7 @@ public protocol PasscodeLockType {
 }
 
 public protocol PasscodeLockTypeDelegate: class {
-    func passcodeLockConfirmDidSucceed(_ lock: PasscodeLockType)
+    func passcodeLockConfirmDidSucceed(_ lock: PasscodeLockType, passcode: String)
     func passcodeLockConfirmDidFail(_ lock: PasscodeLockType)
     func passcodeLockDidChangeState(_ lock: PasscodeLockType, state: PasscodeLockStateType)
     func passcodeLock(_ lock: PasscodeLockType, addedSignAt index: Int)
