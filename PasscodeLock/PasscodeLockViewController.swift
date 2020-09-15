@@ -22,10 +22,9 @@ public enum LockState {
         }
     }
 }
-
+public typealias ResultVerifyPasscode = (PasscodeLockStateType) -> (Bool)
 open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegate {
-    
-    
+        
     private static var nibName: String { return "PasscodeLockView" }
 
     open class var nibBundle: Bundle {
@@ -44,13 +43,14 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
     open var forgotPasscodeCallback: (() -> Void)?
-    open var enterPasscodeCallback: ((_ pass: String, _ isEnableEnterPIN: Bool) -> Void)?
+    open var enterPasscodeCallback: ((_ passcode: String, _ isEnableEnterPIN: Bool) -> Void)?
+    open var enterFullPasscodeCallback: ((_ passcode: String) -> Void)?
     open var dismissCompletionCallback: (() -> Void)?
     open var animateOnDismiss: Bool
     open var notificationCenter: NotificationCenter?
 
     internal let passcodeConfiguration: PasscodeLockConfigurationType
-    internal var passcodeLock: PasscodeLockType
+    internal var passcodeLock: PasscodeLock
     internal var isPlaceholdersAnimationCompleted = true
 
     private var shouldTryToAuthenticateWithBiometrics = true
@@ -60,9 +60,11 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     private var remainCountdown = 0
     private var timer: RepeatingTimer?
     private var isEnableEnterPIN: Bool = true
+    private var passcodeLockStateType: PasscodeLockStateType
     // MARK: - Initializers
 
     public init(state: PasscodeLockStateType, configuration: PasscodeLockConfigurationType, animateOnDismiss: Bool = true) {
+        self.passcodeLockStateType = state
         self.animateOnDismiss = animateOnDismiss
         passcodeConfiguration = configuration
         passcodeLock = PasscodeLock(state: state, configuration: configuration)
@@ -231,7 +233,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
 
     // MARK: - PasscodeLockDelegate
 
-    open func passcodeLockDidSucceed(_ lock: PasscodeLockType) {
+    open func passcodeLockConfirmDidSucceed(_ lock: PasscodeLockType) {
         cancelButton?.isSelected = false
         animatePlaceholders(placeholders, toState: .inactive)
         dismissPasscodeLock(lock) { [weak self] in
@@ -239,7 +241,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         }
     }
 
-    open func passcodeLockDidFail(_ lock: PasscodeLockType) {
+    open func passcodeLockConfirmDidFail(_ lock: PasscodeLockType) {
         self.titleLabel?.text = "Mã PIN không đúng"
         animateWrongPassword()
     }
@@ -293,7 +295,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         self.descriptionLabel?.isHidden = true
         self.isEnableEnterPIN = true
     }
-    open func passcodeLockDidChangeState(_ lock: PasscodeLockType) {
+    open func passcodeLockDidChangeState(_ lock: PasscodeLockType, state: PasscodeLockStateType) {
+        self.passcodeLockStateType = state
         updatePasscodeView()
         animatePlaceholders(placeholders, toState: .inactive)
         cancelButton?.isSelected = true
@@ -302,8 +305,32 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open func passcodeLock(_ lock: PasscodeLockType, addedSignAt index: Int) {
         animatePlacehodlerAtIndex(index, toState: .active)
         cancelButton?.isSelected = false
+        
+        
+    }
+    open func passcodeLock(_ lock: PasscodeLockType, fillPasscode passcode: String, lockState: PasscodeLockStateType) {
+        if stage == .set{
+            passcodeLockStateType.accept(passcode: passcode, from: lock)
+        }else{
+            if let callback = enterFullPasscodeCallback{
+                callback(passcode)
+            }
+        }
     }
 
+    open func updateVerifyResult(isVerify: Bool, message: String, state: LockState){
+        self.titleLabel?.text = message
+        if isVerify{
+            if state == .change{
+                self.stage = .set
+                passcodeLock.changeState(SetNewPasscodeState())
+            }
+        }else{
+            animateWrongPassword()
+        }
+        
+        
+    }
     open func passcodeLock(_ lock: PasscodeLockType, removedSignAt index: Int) {
         animatePlacehodlerAtIndex(index, toState: .inactive)
 

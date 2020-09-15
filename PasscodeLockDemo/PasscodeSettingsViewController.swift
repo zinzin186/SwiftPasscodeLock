@@ -67,6 +67,11 @@ class PasscodeSettingsViewController: UIViewController {
         let passcodeLock = PasscodeLockViewController(state: .change, configuration: config)
 
         present(passcodeLock, animated: true, completion: nil)
+        passcodeLock.enterFullPasscodeCallback = { passcode in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                passcodeLock.updateVerifyResult(isVerify: true, message: "Nhập mã PIN mới", state: .change)
+            }
+        }
     }
 
     @IBAction func testAlertButtonTap(sender: UIButton) {
@@ -75,6 +80,7 @@ class PasscodeSettingsViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 
         present(alertVC, animated: true, completion: nil)
+        
     }
 
     @IBAction func testActivityButtonTap(sender: UIButton) {
@@ -99,11 +105,21 @@ class PasscodeSettingsViewController: UIViewController {
     @IBAction func enter(_ sender: Any) {
         let passcodeVC = PasscodeLockViewController(state: .enter, configuration: configuration)
         present(passcodeVC, animated: true, completion: nil)
+        passcodeVC.enterFullPasscodeCallback = { passcode in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                passcodeVC.updateVerifyResult(isVerify: true, message: "Mã PIN không đúng", state: .enter)
+            }
+        }
     }
     
     @IBAction func remove(_ sender: Any) {
         let passcodeVC = PasscodeLockViewController(state: .remove, configuration: configuration)
         present(passcodeVC, animated: true, completion: nil)
+        passcodeVC.enterFullPasscodeCallback = { passcode in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                passcodeVC.updateVerifyResult(isVerify: true, message: "Mã PIN không đúng", state: .enter)
+            }
+        }
     }
     
     

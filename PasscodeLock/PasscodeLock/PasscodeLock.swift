@@ -40,9 +40,14 @@ open class PasscodeLock: PasscodeLockType {
         delegate?.passcodeLock(self, addedSignAt: passcode.count - 1)
 
         if passcode.count >= configuration.passcodeLength {
-            lockState.accept(passcode: passcode, from: self)
+            delegate?.passcodeLock(self, fillPasscode: passcode, lockState: lockState)
+//            lockState.accept(passcode: passcode, from: self)
             passcode.removeAll(keepingCapacity: true)
         }
+    }
+
+    func getPasscode()->String{
+        return self.passcode
     }
 
     open func removeSign() {
@@ -55,7 +60,7 @@ open class PasscodeLock: PasscodeLockType {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.lockState = state
-            strongSelf.delegate?.passcodeLockDidChangeState(strongSelf)
+            strongSelf.delegate?.passcodeLockDidChangeState(strongSelf, state: state)
         }
     }
 
@@ -75,10 +80,10 @@ open class PasscodeLock: PasscodeLockType {
     }
 
     private func handleTouchIDResult(_ success: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            guard success, let strongSelf = self else { return }
-            strongSelf.delegate?.passcodeLockDidSucceed(strongSelf)
-        }
+//        DispatchQueue.main.async { [weak self] in
+//            guard success, let strongSelf = self else { return }
+//            strongSelf.delegate?.passcodeLockDidSucceed(strongSelf)
+//        }
     }
 
     private func isTouchIDEnabled() -> Bool {

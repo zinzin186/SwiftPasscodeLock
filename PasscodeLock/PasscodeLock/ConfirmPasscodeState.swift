@@ -25,18 +25,10 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
     }
     
     func accept(passcode: String, from lock: PasscodeLockType) {
-        
         if passcode == passcodeToConfirm {
-            lock.repository.save(passcode: passcode) { (isSucceed) in
-                if isSucceed{
-                    lock.delegate?.passcodeLockDidSucceed(lock)
-                }
-            }
-//            lock.repository.save(passcode: passcode)
-            
-        
+            lock.delegate?.passcodeLockConfirmDidSucceed(lock)
         } else {
-            lock.delegate?.passcodeLockDidFail(lock)
+            lock.delegate?.passcodeLockConfirmDidFail(lock)
         }
     }
 }
@@ -58,18 +50,10 @@ struct ConfirmNewPasscodeState: PasscodeLockStateType {
     }
     
     func accept(passcode: String, from lock: PasscodeLockType) {
-        
         if passcode == passcodeToConfirm {
-            lock.repository.save(passcode: passcode) { (isSucceed) in
-                if isSucceed{
-                    lock.delegate?.passcodeLockDidSucceed(lock)
-                }
-            }
-//            lock.repository.save(passcode: passcode)
-//            lock.delegate?.passcodeLockDidSucceed(lock)
-        
+            lock.delegate?.passcodeLockConfirmDidSucceed(lock)
         } else {
-            lock.delegate?.passcodeLockDidFail(lock)
+            lock.delegate?.passcodeLockConfirmDidFail(lock)
         }
     }
 }

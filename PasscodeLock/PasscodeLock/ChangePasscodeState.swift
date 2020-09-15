@@ -31,17 +31,8 @@ struct ChangePasscodeState: PasscodeLockStateType {
                     lock.configuration.setIncorrectPasscodeAttempts(0)
                 }
 
-                lock.delegate?.passcodeLockDidFail(lock)
+                lock.delegate?.passcodeLockConfirmDidFail(lock)
             }
         }
-        
-//        if lock.repository.check(passcode: passcode) {
-//
-//            lock.changeState(SetNewPasscodeState())
-//
-//        } else {
-//
-//            lock.delegate?.passcodeLockDidFail(lock)
-//        }
     }
 }
