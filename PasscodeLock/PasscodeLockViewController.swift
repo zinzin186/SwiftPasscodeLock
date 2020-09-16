@@ -238,9 +238,10 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     open func passcodeLockConfirmDidSucceed(_ lock: PasscodeLockType, passcode: String) {
         cancelButton?.isSelected = false
         animatePlaceholders(placeholders, toState: .inactive)
-        dismissPasscodeLock(lock) { [weak self] in
-            self?.enterFullPasscodeCallback?(passcode)
-        }
+//        dismissPasscodeLock(lock) { [weak self] in
+//            self?.enterFullPasscodeCallback?(passcode)
+//        }
+        self.enterFullPasscodeCallback?(passcode)
     }
 
     open func passcodeLockConfirmDidFail(_ lock: PasscodeLockType) {
@@ -311,10 +312,24 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         
         
     }
+    var currentPass: String?
     open func passcodeLock(_ lock: PasscodeLockType, fillPasscode passcode: String, lockState: PasscodeLockStateType) {
         if stage == .set{
-            passcodeLockStateType.accept(passcode: passcode, from: lock)
+            if currentPass == passcode{
+                animateWrongPassword()
+                let alert = UIAlertController(title: nil, message: "Mã PIN mới không được trùng với mã PIN cũ", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak self] (_) in
+                    self?.passcodeLock.changeState(SetNewPasscodeState())
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                passcodeLockStateType.accept(passcode: passcode, from: lock)
+            }
+            
         }else{
+            if stage == .change{
+                currentPass = passcode
+            }
             if let callback = enterFullPasscodeCallback{
                 callback(passcode)
             }

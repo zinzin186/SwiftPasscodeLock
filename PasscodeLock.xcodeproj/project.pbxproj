@@ -26,6 +26,7 @@
 		3D38786F2508781900212C01 /* DancingScript-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D38785F2508781900212C01 /* DancingScript-Regular.ttf */; };
 		3D3878702508781900212C01 /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878602508781900212C01 /* Pacifico-Regular.ttf */; };
 		3D3878712508781900212C01 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D3878612508781900212C01 /* SF-Pro-Text-Medium.otf */; };
+		96FEE12525126A2E0093D775 /* ic-lock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FEE12425126A2E0093D775 /* ic-lock@3x.png */; };
 		C99EAF431B90B05700D61E1B /* PasscodeLock.h in Headers */ = {isa = PBXBuildFile; fileRef = C99EAF421B90B05700D61E1B /* PasscodeLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C99EAF4A1B90B05800D61E1B /* PasscodeLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99EAF3F1B90B05700D61E1B /* PasscodeLock.framework */; };
 		C9D3DF0B1B919CE4008561EB /* PasscodeLockView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9D3DF0A1B919CE4008561EB /* PasscodeLockView.xib */; };
@@ -142,6 +143,7 @@
 		3D38785F2508781900212C01 /* DancingScript-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DancingScript-Regular.ttf"; sourceTree = "<group>"; };
 		3D3878602508781900212C01 /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		3D3878612508781900212C01 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
+		96FEE12425126A2E0093D775 /* ic-lock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic-lock@3x.png"; path = "PasscodeAsset.xcassets/ic-lock.imageset/ic-lock@3x.png"; sourceTree = "<group>"; };
 		C99EAF3F1B90B05700D61E1B /* PasscodeLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PasscodeLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99EAF421B90B05700D61E1B /* PasscodeLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasscodeLock.h; sourceTree = "<group>"; };
 		C99EAF441B90B05700D61E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				C9DC08041B90D394007A4DD0 /* ChangePasscodeState.swift */,
 				0A526E141DA6786200114A5E /* RemovePasscodeState.swift */,
 				3D38781625064CE800212C01 /* CountDownable.swift */,
+				96FEE12425126A2E0093D775 /* ic-lock@3x.png */,
 				3D38784F2508748D00212C01 /* PasscodeAsset.xcassets */,
 			);
 			path = PasscodeLock;
@@ -585,6 +588,7 @@
 				3D3878652508781900212C01 /* SF-Pro-Display-Bold.otf in Resources */,
 				3D3878642508781900212C01 /* SF-Pro-Display-Regular.otf in Resources */,
 				3D3878712508781900212C01 /* SF-Pro-Text-Medium.otf in Resources */,
+				96FEE12525126A2E0093D775 /* ic-lock@3x.png in Resources */,
 				3D3878622508781900212C01 /* BalooPaaji-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
