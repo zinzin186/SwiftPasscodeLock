@@ -34,6 +34,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     
     
     
+    @IBOutlet weak var lockImageView: UIImageView!
     @IBOutlet open var placeholders: [PasscodeSignPlaceholderView] = [PasscodeSignPlaceholderView]()
     @IBOutlet open weak var titleLabel: UILabel?
     @IBOutlet open weak var descriptionLabel: UILabel?
@@ -41,7 +42,8 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     @IBOutlet open weak var placeholdersX: NSLayoutConstraint?
     @IBOutlet weak var forgotCodeButton: UIButton!
     
-//    open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
+    @IBOutlet weak var topConstraintOfTitleLabel: NSLayoutConstraint!
+    //    open var successCallback: ((_ lock: PasscodeLockType) -> Void)?
     open var forgotPasscodeCallback: (() -> Void)?
     open var enterPasscodeCallback: ((_ passcode: String, _ isEnableEnterPIN: Bool) -> Void)?
     open var enterFullPasscodeCallback: ((_ passcode: String) -> Void)?
@@ -106,9 +108,13 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         }else{
             forgotCodeButton.isHidden = true
         }
-        
+        if UIScreen.main.bounds.height < 1300{
+            self.topConstraintOfTitleLabel.constant = 60
+            self.lockImageView.isHidden = true
+        }
     }
 
+    
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
