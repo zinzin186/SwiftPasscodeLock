@@ -15,9 +15,8 @@ s.source_files = 'PasscodeLock/*.{h,swift}',
 s.resources = [
 				'PasscodeLock/Views/PasscodeLockView.xib',
 				'PasscodeLock/en.lproj/*',
-                'Images/*.png',
-                'Pod/Assets/*.xcassets',
-                'Pod/Resources/Fonts/*.ttf'
+                'PasscodeLock/PasscodeLock/PasscodeAsset.xcassets',
+                'PasscodeLock/Fonts/*.ttf'
 			  ]
 
 s.requires_arc = true
