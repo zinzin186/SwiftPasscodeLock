@@ -10,12 +10,14 @@ s.source = { :git => 'https://github.com/zahlz/SwiftPasscodeLock.git' }
 s.ios.deployment_target = '9.0'
 
 s.source_files = 'PasscodeLock/*.{h,swift}',
-				 'PasscodeLock/*/*.{swift}',
-                 'PasscodeLock/*/*.{xcassets}'
+				 'PasscodeLock/*/*.{swift}'
 
 s.resources = [
 				'PasscodeLock/Views/PasscodeLockView.xib',
-				'PasscodeLock/en.lproj/*'
+				'PasscodeLock/en.lproj/*',
+                'Images/*.png',
+                'Pod/Assets/*.xcassets',
+                'Pod/Resources/Fonts/*.ttf'
 			  ]
 
 s.requires_arc = true
