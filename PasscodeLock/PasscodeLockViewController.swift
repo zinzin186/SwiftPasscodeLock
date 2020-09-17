@@ -314,6 +314,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
     var currentPass: String?
     open func passcodeLock(_ lock: PasscodeLockType, fillPasscode passcode: String, lockState: PasscodeLockStateType) {
+        cancelButton?.isSelected = true
         if stage == .set{
             if currentPass == passcode{
                 animateWrongPassword()
