@@ -34,7 +34,7 @@ class PasscodeSettingsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        print(Int("0000"))
         updatePasscodeView()
     }
 

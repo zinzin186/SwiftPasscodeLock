@@ -275,6 +275,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
     }
     private func startTimer() {
         resetTimer()
+        self.updateUIWhenCoundown(seconds: self.timeCountDownEnterPIN)
         self.isEnableEnterPIN = false
         timer = RepeatingTimer(timeInterval: 1)
         timer?.eventHandler = {[weak self] in
