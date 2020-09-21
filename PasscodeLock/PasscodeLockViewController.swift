@@ -109,7 +109,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             forgotCodeButton.isHidden = true
         }
         if UIScreen.main.bounds.height <= 667{
-            self.topConstraintOfTitleLabel.constant = 60
+            self.topConstraintOfTitleLabel.constant = 50
             self.lockImageView.isHidden = true
         }
     }
