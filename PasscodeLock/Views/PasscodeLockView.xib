@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -36,47 +36,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zgw-AC-cVv">
-                    <rect key="frame" x="19" y="498" width="282" height="50"/>
-                    <subviews>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUa-E7-b57" userLabel="Forgot Code">
-                            <rect key="frame" x="0.0" y="0.0" width="76" height="50"/>
-                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
-                            <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
-                            <state key="normal" title="Quên mã">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="getPassCode:" destination="-1" eventType="touchUpInside" id="jsK-BA-sN7"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ix-cV-tX0" userLabel="Cancel">
-                            <rect key="frame" x="244" y="0.0" width="38" height="50"/>
-                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
-                            <state key="normal" title="Xoá">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <state key="selected" title="Huỷ">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="cancelButtonTap:" destination="-1" eventType="touchUpInside" id="1Rj-cT-0gy"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="5dI-cC-P8e"/>
-                        <constraint firstAttribute="trailing" secondItem="4Ix-cV-tX0" secondAttribute="trailing" id="8Rk-I0-wUJ"/>
-                        <constraint firstAttribute="bottom" secondItem="4Ix-cV-tX0" secondAttribute="bottom" id="UYd-7m-vtF"/>
-                        <constraint firstAttribute="bottom" secondItem="RUa-E7-b57" secondAttribute="bottom" id="VQP-by-mre"/>
-                        <constraint firstItem="RUa-E7-b57" firstAttribute="top" secondItem="zgw-AC-cVv" secondAttribute="top" id="dfD-FW-lsH"/>
-                        <constraint firstItem="4Ix-cV-tX0" firstAttribute="top" secondItem="zgw-AC-cVv" secondAttribute="top" id="iIJ-Um-T2V"/>
-                        <constraint firstItem="RUa-E7-b57" firstAttribute="leading" secondItem="zgw-AC-cVv" secondAttribute="leading" id="tQI-mO-n7O"/>
-                    </constraints>
-                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-lock" translatesAutoresizingMaskIntoConstraints="NO" id="LuO-mm-Y3K">
                     <rect key="frame" x="148.5" y="64" width="23" height="36"/>
                     <constraints>
@@ -470,25 +429,56 @@
                         <constraint firstAttribute="height" constant="345" id="sQJ-wo-Tn5"/>
                     </constraints>
                 </stackView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUa-E7-b57" userLabel="Forgot Code">
+                    <rect key="frame" x="19" y="508" width="76" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Frb-KO-fS1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
+                    <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                    <state key="normal" title="Quên mã">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="getPassCode:" destination="-1" eventType="touchUpInside" id="jsK-BA-sN7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ix-cV-tX0" userLabel="Cancel">
+                    <rect key="frame" x="263" y="508" width="38" height="40"/>
+                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="16"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                    <state key="normal" title="Xoá">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <state key="selected" title="Huỷ">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonTap:" destination="-1" eventType="touchUpInside" id="1Rj-cT-0gy"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.32941176470588235" green="0.46274509803921571" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1wK-Ol-7mm" firstAttribute="top" secondItem="LuO-mm-Y3K" secondAttribute="bottom" constant="37" id="5rc-to-YCP"/>
+                <constraint firstItem="4Ix-cV-tX0" firstAttribute="bottom" secondItem="RUa-E7-b57" secondAttribute="bottom" id="DYD-H2-rVA"/>
                 <constraint firstItem="1wK-Ol-7mm" firstAttribute="bottom" secondItem="HbT-GO-CPk" secondAttribute="top" constant="-10" id="F4T-j8-jQJ"/>
-                <constraint firstAttribute="bottom" secondItem="zgw-AC-cVv" secondAttribute="bottom" constant="20" id="KTd-lt-h98"/>
+                <constraint firstItem="RUa-E7-b57" firstAttribute="leading" secondItem="aOd-Jr-lsh" secondAttribute="leading" id="FzD-d5-oHz"/>
                 <constraint firstItem="LuO-mm-Y3K" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="KzQ-Mo-LO7"/>
                 <constraint firstItem="aOd-Jr-lsh" firstAttribute="top" secondItem="2gd-IG-XsP" secondAttribute="bottom" constant="47" id="MZy-hL-wpf"/>
-                <constraint firstItem="zgw-AC-cVv" firstAttribute="trailing" secondItem="aOd-Jr-lsh" secondAttribute="trailing" id="Pjm-86-XNB"/>
+                <constraint firstAttribute="bottom" secondItem="RUa-E7-b57" secondAttribute="bottom" constant="20" id="O5x-Yn-PtY"/>
                 <constraint firstItem="1wK-Ol-7mm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Qup-3g-Gux"/>
                 <constraint firstItem="1wK-Ol-7mm" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="trailing" constant="16" id="RDw-W3-MpZ"/>
+                <constraint firstItem="4Ix-cV-tX0" firstAttribute="trailing" secondItem="aOd-Jr-lsh" secondAttribute="trailing" id="RXX-C5-kFE"/>
                 <constraint firstItem="HbT-GO-CPk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RgV-eT-vCl"/>
                 <constraint firstItem="1wK-Ol-7mm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VMo-hv-2qR"/>
                 <constraint firstItem="2gd-IG-XsP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dbI-Ld-dOu"/>
                 <constraint firstItem="1wK-Ol-7mm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="137" id="eBG-7z-TMu"/>
-                <constraint firstItem="zgw-AC-cVv" firstAttribute="leading" secondItem="aOd-Jr-lsh" secondAttribute="leading" id="eru-Ux-YcA"/>
                 <constraint firstItem="2gd-IG-XsP" firstAttribute="top" secondItem="1wK-Ol-7mm" secondAttribute="top" constant="85" id="fQm-Ox-dxt"/>
                 <constraint firstItem="LuO-mm-Y3K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="nV1-NT-dlp"/>
                 <constraint firstItem="aOd-Jr-lsh" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pUx-mo-MOF"/>
+                <constraint firstItem="4Ix-cV-tX0" firstAttribute="height" secondItem="RUa-E7-b57" secondAttribute="height" id="r76-bT-ImO"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
