@@ -20,7 +20,7 @@ struct ConfirmPasscodeState: PasscodeLockStateType {
     init(passcode: String) {
         
         passcodeToConfirm = passcode
-        title = "Nhập lại mã PIN để xác nhận"
+        title = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "chat.passcode_create_retype_pass") ?? "Nhập lại mã PIN để xác nhận"
         description = ""
     }
     
