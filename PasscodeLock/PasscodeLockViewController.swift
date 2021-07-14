@@ -112,6 +112,12 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
             self.topConstraintOfTitleLabel.constant = 50
             self.lockImageView.isHidden = true
         }
+        let cancelButtonName = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "common.cancel") ?? "Cancel"
+        self.cancelButton?.setTitle(cancelButtonName, for: .selected)
+        let cancelButtonNormalName = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "page.delete") ?? "Xoá"
+        self.cancelButton?.setTitle(cancelButtonNormalName, for: .normal)
+        let forgotCodeButtonName = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "chat.passcode_forgot") ?? "Quên mã"
+        self.forgotCodeButton?.setTitle(forgotCodeButtonName, for: .normal)
     }
 
     
@@ -295,7 +301,7 @@ open class PasscodeLockViewController: UIViewController, PasscodeLockTypeDelegat
         timer?.resume()
     }
     func updateUIWhenCoundown(seconds: Int){
-        self.descriptionLabel?.text = "Thử lại sau \(seconds) giây"
+        self.descriptionLabel?.text = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "chat.passcode_try_again", with: seconds) ?? "Thử lại sau \(seconds) giây"
         
         if seconds == 0 {
             self.allowEnterPIN()

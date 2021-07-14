@@ -15,7 +15,7 @@ struct RemovePasscodeState: PasscodeLockStateType {
     var isTouchIDAllowed: Bool { return false }
 
     init() {
-        title = "Nhập mã PIN để tiếp tục"
+        title = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "chat.passcode_enter_pass") ?? "Nhập mã PIN để tiếp tục"
         description = ""
     }
 

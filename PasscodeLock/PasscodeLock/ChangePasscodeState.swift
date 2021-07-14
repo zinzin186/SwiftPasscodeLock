@@ -8,6 +8,17 @@
 
 import Foundation
 
+public protocol LocalizedDataSource: class {
+    func getLocallizeText(key: String) -> String
+    func getLocallizeText(key: String, with pluralizedManyValue: Int) -> String
+}
+
+public class LocalizedPasscodeManager: NSObject {
+    public weak var localizedDataSource: LocalizedDataSource?
+    public static let shared = LocalizedPasscodeManager()
+     
+}
+
 struct ChangePasscodeState: PasscodeLockStateType {
     
     let title: String

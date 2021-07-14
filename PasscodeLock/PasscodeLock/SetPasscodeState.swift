@@ -23,7 +23,7 @@ struct SetPasscodeState: PasscodeLockStateType {
     
     init() {
         
-        title = "Tạo mã PIN cho\nTrò chuyện bí mật"
+        title = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "chat.passcode_create_pass") ?? "Tạo mã PIN cho\nTrò chuyện bí mật"
         description = ""
     }
     

@@ -18,7 +18,7 @@ struct EnterPasscodeState: PasscodeLockStateType {
 
     init(allowCancellation: Bool = false) {
         isCancellableAction = allowCancellation
-        title = "Nhập mã PIN để tiếp tục"
+        title = LocalizedPasscodeManager.shared.localizedDataSource?.getLocallizeText(key: "chat.passcode_enter_pass") ?? "Nhập mã PIN để tiếp tục"
         description = ""
     }
 
